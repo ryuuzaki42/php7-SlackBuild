@@ -214,7 +214,7 @@ CFLAGS="$SLKCFLAGS" \
   --enable-soap=shared \
   --enable-sockets \
   --with-sqlite3=shared \
-  --with-mssql=shared,/usr/local/freetds/ \
+  --with-mssql=shared,/usr \
   --enable-sysvmsg \
   --enable-sysvsem \
   --enable-sysvshm \
