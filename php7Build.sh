@@ -26,6 +26,21 @@
 CWD=$(pwd)
 wget -c https://downloads.php.net/~davey/php-7.1.0RC3.tar.xz -P $CWD/php/
 wget -c https://slackbuilds.org/mirror/slackware/slackware-14.2/source/n/alpine/alpine-2.20.tar.xz -P $CWD/alpine/
+wget -c ftp://ftp.freetds.org/pub/freetds/stable/freetds-1.00.9.tar.gz -P $CWD/freetds/
 echo ""
 echo "Enter root password!"
-su -c "sh $CWD/php/php.SlackBuild"
+#su -c "sh $CWD/php/php.SlackBuild"
+su -c "
+# compile freetds
+( cd $CWD/freetds ; ./freetds.SlackBuild || exit 1 ) || exit 1
+upgradepkg --reinstall --install-new /tmp/freetds-1.00.9-$( uname -m )*.txz
+
+#compile php
+sh $CWD/php/php.SlackBuild
+
+find /etc -name '*php*' -delete
+upgradepkg --reinstall --install-new /tmp/alpine-2.20-$( uname -m )*.txz
+upgradepkg --reinstall --install-new /tmp/imapd-2.20-$( uname -m )*.txz
+upgradepkg --reinstall --install-new /tmp/php-7.1.0RC3-$( uname -m )*.txz
+exit 0
+"

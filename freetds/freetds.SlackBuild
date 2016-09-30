@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=freetds
-VERSION=${VERSION:-1.00}
+VERSION=${VERSION:-1.00.9}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_Rns}
 
@@ -36,7 +36,7 @@ if [ -z "$ARCH" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -53,6 +53,8 @@ else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
 fi
+
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 set -e
 
@@ -77,12 +79,12 @@ CXXFLAGS="$SLKCFLAGS" \
   --sysconfdir=/etc/freetds \
   --localstatedir=/var \
   --mandir=/usr/man \
-  --disable-static \
   --disable-debug \
+  --enable-msdblib \
   --with-openssl \
   --build=$ARCH-slackware-linux
 
-make
+make $NUMJOBS || make || exit 1
 make install DESTDIR=$PKG TARGET_DOCDIR=$PKG/usr/doc/$PRGNAM-$VERSION
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
@@ -106,4 +108,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}
+/sbin/makepkg -l y -c n $TMP/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}

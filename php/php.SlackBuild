@@ -98,7 +98,7 @@ fi
 
 cd $TMP
 rm -rf php-$VERSION
-tar xvf $CWD/php/php-$VERSION.tar.?z* || exit 1
+tar xvf $CWD/php/php-$VERSION.tar.?z || exit 1
 cd php-$VERSION
 
 # cleanup:
