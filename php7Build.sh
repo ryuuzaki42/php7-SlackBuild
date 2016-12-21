@@ -24,7 +24,7 @@
 
 
 CWD=$(pwd)
-wget -c https://downloads.php.net/~davey/php-7.1.0RC3.tar.xz -P $CWD/php/
+wget -c https://downloads.php.net/~davey/php-7.1.0.tar.xz -P $CWD/php/
 wget -c https://slackbuilds.org/mirror/slackware/slackware-14.2/source/n/alpine/alpine-2.20.tar.xz -P $CWD/alpine/
 wget -c ftp://ftp.freetds.org/pub/freetds/stable/freetds-1.00.9.tar.gz -P $CWD/freetds/
 echo ""
