@@ -41,6 +41,6 @@ sh $CWD/php/php.SlackBuild
 find /etc -name '*php*' -delete
 upgradepkg --reinstall --install-new /tmp/alpine-2.20-$( uname -m )*.txz
 upgradepkg --reinstall --install-new /tmp/imapd-2.20-$( uname -m )*.txz
-upgradepkg --reinstall --install-new /tmp/php-7.1.0RC3-$( uname -m )*.txz
+upgradepkg --reinstall --install-new /tmp/php-7.1.0-$( uname -m )*.txz
 exit 0
 "
