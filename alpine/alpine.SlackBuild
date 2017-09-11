@@ -22,9 +22,9 @@
 
 
 PKGNAM=alpine
-VERSION=${VERSION:-2.20}
-ALPINEBUILD=${ALPINEBUILD:-2}
-IMAPDBUILD=${IMAPDBUILD:-2}
+VERSION=${VERSION:-2.21}
+ALPINEBUILD=${ALPINEBUILD:-1}
+IMAPDBUILD=${IMAPDBUILD:-1}
 PINEPGP=${PINEPGP:-0.18.0}
 
 # Automatically determine the architecture we're building on:
@@ -33,7 +33,7 @@ if [ -z "$ARCH" ]; then
     i?86) export ARCH=i586 ;;
     arm*) export ARCH=arm ;;
     # Unless $ARCH is already set, use uname -m for all other archs:
-	*) export ARCH=$( uname -m ) ;;
+       *) export ARCH=$( uname -m ) ;;
   esac
 fi
 
@@ -59,8 +59,8 @@ fi
 
 cd $TMP
 rm -rf alpine-${VERSION}
-tar xvf $CWD/alpine-$VERSION.tar.?z* || exit 1
-cd alpine-$VERSION
+tar xvf $CWD/alpine-$VERSION.tar.xz || exit 1
+cd alpine-$VERSION || exit 1
 
 # Make sure ownerships and permissions are sane:
 chown -R root:root .
@@ -91,7 +91,7 @@ LDFLAGS="-L/usr/lib$LIBSUFIX" \
   --without-tcl \
   --program-prefix= \
   --program-suffix= \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-slackware-linux || exit 1
 
 # Correct paths and programs in tech-notes.txt:
 ( cd doc/tech-notes
@@ -120,7 +120,7 @@ cp -a \
 cd $TMP
 rm -rf pinepgp-$PINEPGP
 tar xvf $CWD/pinepgp-$PINEPGP.tar.gz || exit 1
-cd pinepgp-$PINEPGP
+cd pinepgp-$PINEPGP || exit 1
 zcat $CWD/pinepgp-${PINEPGP}-makefile-sed-fix.diff.gz | patch -p1 --verbose || exit 1
 zcat $CWD/pinepgp.pinegpgp.in.diff.gz | patch -p1 --verbose || exit 1
 chown -R root:root .
@@ -176,7 +176,7 @@ PKG2=/tmp/package-imapd
 cd $TMP
 rm -rf $PKG2
 mkdir -p $PKG2
-cd alpine-$VERSION/imap
+cd alpine-$VERSION/imap || exit 1
 mkdir -p $PKG2/usr/doc/imapd-$VERSION
 cp -a \
   CONTENTS LICENSE.txt NOTICE SUPPORT \

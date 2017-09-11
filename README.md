@@ -1,5 +1,5 @@
 # php7-SlackBuild
-Script to compile php 7 on Slackware 14.02
+Script to compile php 7 on Slackware 14.02 and current
 
 ### Installation
 

@@ -7,7 +7,7 @@
 # All rights reserved.
 #
 # Modified for php 7.1.0RC1 by rumbler.soppa@rellcom.com.br
-#
+# Modified for php 7.1.9       by rumbler.soppa@gmail.com 						seg set 11 08:04:02 -04 2017
 #
 # Redistribution and use of this script, with or without modification, is
 # permitted provided that the following conditions are met:
@@ -28,7 +28,7 @@
 
 
 VERSION=${VERSION:-$(echo php/php-*.tar.xz | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
-ALPINE=2.20
+ALPINE=2.21
 BUILD=${BUILD:-1}
 
 # Automatically determine the architecture we're building on:
@@ -135,8 +135,8 @@ zcat $CWD/php/php.ini-development.diff.gz | patch -p1 --verbose php.ini-producti
 
 # Install the build folder into /usr/lib$LIBDIRSUFFIX/php/build
 # and adapt phpize accordingly:
-sed -i "s|build$|php/build|" scripts/Makefile.frag
-sed -i "s|build\"$|php/build\"|" scripts/phpize.in
+#sed -i "s|build$|php/build|" scripts/Makefile.frag
+#sed -i "s|build\"$|php/build\"|" scripts/phpize.in
 
 # Generic "kitchen sink" configure function, with as many things as possible (and
 # maybe then some ;-) compiled as shared extensions:
