@@ -169,6 +169,7 @@ cat $CWD/slack-desc.alpine > $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $TMP/${PKGNAM}-$VERSION-$ARCH-$ALPINEBUILD.txz
+upgradepkg --reinstall --install-new /tmp/alpine-2.21-$( uname -m )*.txz
 
 # As is customary, now build a package for the included IMAP and
 # POP3 daemons:
@@ -201,4 +202,5 @@ mkdir -p $PKG2/install
 cat $CWD/slack-desc.imapd > $PKG2/install/slack-desc
 cd $PKG2
 /sbin/makepkg -l y -c n $TMP/imapd-$VERSION-$ARCH-$IMAPDBUILD.txz
+upgradepkg --reinstall --install-new /tmp/imapd-2.21-$( uname -m )*.txz
 

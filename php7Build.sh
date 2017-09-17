@@ -34,8 +34,8 @@ upgradepkg --reinstall --install-new /tmp/freetds-1.00.9-$( uname -m )*.txz
 sh $CWD/php/php.SlackBuild
 
 find /etc -name '*php*' -delete
-upgradepkg --reinstall --install-new /tmp/alpine-2.21-$( uname -m )*.txz
-upgradepkg --reinstall --install-new /tmp/imapd-2.21-$( uname -m )*.txz
+#upgradepkg --reinstall --install-new /tmp/alpine-2.21-$( uname -m )*.txz
+#upgradepkg --reinstall --install-new /tmp/imapd-2.21-$( uname -m )*.txz
 upgradepkg --reinstall --install-new /tmp/php-7.1.9-$( uname -m )*.txz
 exit 0
 "
